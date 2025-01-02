@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Cat</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+        #ascii-cat {
+            white-space: pre;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #5c67f2;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4a53c6;
+        }
+        #theme-selector, #color-settings {
+            margin-top: 20px;
+        }
+        #color-settings input {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a Cat</h1>
+    <p>Enter your name and get your unique ASCII cat!</p>
+    <input type="text" id="name-input" placeholder="Enter your name" />
+    <br>
+    <button onclick="generateCat()">Generate Cat</button>
+    <div id="ascii-cat"></div>
+
+    <div id="theme-selector">
+        <h2>Choose a Theme</h2>
+        <button onclick="setTheme('pirate')">Pirate Cat</button>
+        <button onclick="setTheme('space')">Space Cat</button>
+        <button onclick="setTheme('default')">Default</button>
+    </div>
+
+    <div id="color-settings">
+        <h2>Customize Colors</h2>
+        <label for="bg-color">Background Color: </label>
+        <input type="color" id="bg-color" onchange="changeBackgroundColor()">
+        <br>
+        <label for="text-color">Text Color: </label>
+        <input type="color" id="text-color" onchange="changeTextColor()">
+    </div>
+
+    <script>
+        let currentTheme = 'default';
+
+        function generateCat() {
+            const name = document.getElementById('name-input').value;
+            const asciiCatElement = document.getElementById('ascii-cat');
+
+            if (!name) {
+                asciiCatElement.textContent = 'Please enter a name to generate a cat.';
+                return;
+            }
+
+            const hash = Array.from(name).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            const ear = hash % 2 === 0 ? '/\\' : '\\/';
+            const eyes = hash % 3 === 0 ? 'oo' : (hash % 3 === 1 ? '^^' : '--');
+            const mouth = hash % 5 === 0 ? 'w' : (hash % 5 === 1 ? 'u' : (hash % 5 === 2 ? '.' : 'o'));
+
+            const descriptions = {
+                default: [
+                    'This cat loves to chase laser pointers.',
+                    'A sleepy cat who dreams of big adventures.',
+                    'This cat is curious about everything.',
+                    'A playful cat with a mischievous streak.',
+                    'This cat enjoys lounging in the sun.'
+                ],
+                pirate: [
+                    'This cat sails the seven seas.',
+                    'A fierce feline with a treasure map.',
+                    'Always on the lookout for fish and gold.',
+                    'This cat wears an eyepatch with pride.',
+                    'A swashbuckling cat who loves adventure.'
+                ],
+                space: [
+                    'This cat is a galactic explorer.',
+                    'A feline astronaut with a love for stargazing.',
+                    'Always floating around in zero gravity.',
+                    'This cat pilots a spaceship.',
+                    'A curious cat traveling through wormholes.'
+                ]
+            };
+
+            const themeDescriptions = descriptions[currentTheme] || descriptions['default'];
+            const description = themeDescriptions[hash % themeDescriptions.length];
+
+            const cat = `
+               ${ear}
+              (${eyes})
+              ( ${mouth} )
+              (_____)
+
+            Description: ${description}`;
+
+            asciiCatElement.textContent = cat;
+        }
+
+        function setTheme(theme) {
+            currentTheme = theme;
+            generateCat();
+        }
+
+        function changeBackgroundColor() {
+            const color = document.getElementById('bg-color').value;
+            document.body.style.backgroundColor = color;
+        }
+
+        function changeTextColor() {
+            const color = document.getElementById('text-color').value;
+            document.body.style.color = color;
+        }
+    </script>
+</body>
+</html>
