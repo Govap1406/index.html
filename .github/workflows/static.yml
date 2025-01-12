@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐧 Create a Pingu 🐧</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #00796b;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .section {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .customization-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .penguin-preview {
+            position: relative;
+            width: 200px;
+            height: 300px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 20px auto;
+        }
+
+        .penguin-preview .belly {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px;
+            height: 140px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .penguin-preview .eye {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .penguin-preview .eye.left {
+            top: 30px;
+            left: 50px;
+        }
+
+        .penguin-preview .eye.right {
+            top: 30px;
+            right: 50px;
+        }
+
+        .penguin-preview .foot {
+            position: absolute;
+            bottom: 10px;
+            width: 50px;
+            height: 20px;
+            background-color: orange;
+            border-radius: 10px;
+        }
+
+        .penguin-preview .foot.left {
+            left: 20px;
+        }
+
+        .penguin-preview .foot.right {
+            right: 20px;
+        }
+
+        .penguin-preview .scarf {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            width: 160px;
+            height: 20px;
+            background-color: red;
+        }
+
+        .penguin-preview .hat {
+            position: absolute;
+            top: -30px;
+            left: 50px;
+            width: 100px;
+            height: 50px;
+            background-color: blue;
+            border-radius: 50px 50px 0 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #00796b;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .category {
+            padding: 20px;
+            border: 2px solid #004d40;
+            border-radius: 10px;
+            background-color: #b2dfdb;
+            max-width: 300px;
+        }
+
+        .category h3 {
+            color: #004d40;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🐧 Create a Pingu 🐧</h1>
+    </header>
+
+    <section class="section">
+        <p>Welcome to Create a Pingu! Here you can design your very own penguin and learn more about these fascinating creatures. 
+        Penguins are a symbol of resilience, teamwork, and charm—just like your personalized Pingu!</p>
+        <p><em>"Life is better with a little waddle and a lot of heart."</em></p>
+        <button onclick="startCreating()">Start Creating</button>
+        <button onclick="learnMore()">Learn More About Penguins</button>
+    </section>
+
+    <section id="customization-area" class="section">
+        <h2>Customize Your Penguin</h2>
+        <div class="penguin-preview">
+            <div class="belly"></div>
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+            <div class="foot left"></div>
+            <div class="foot right"></div>
+        </div>
+        <button onclick="changeBellyColor()">Change Belly Color</button>
+        <button onclick="changeEyeColor()">Change Eye Color</button>
+        <button onclick="changeFootColor()">Change Foot Color</button>
+        <button onclick="toggleScarf()">Add/Remove Scarf</button>
+        <button onclick="toggleHat()">Add/Remove Hat</button>
+    </section>
+
+    <section id="meet-the-penguins" class="section">
+        <h2>Meet the Penguins</h2>
+        <div class="categories">
+            <div class="category">
+                <h3>Emperor Penguin</h3>
+                <p>The largest of all penguin species, known for their majestic stature and incredible survival skills in the Antarctic.</p>
+            </div>
+            <div class="category">
+                <h3>Adelie Penguin</h3>
+                <p>Small and feisty, Adelie penguins are characterized by their bold personality and striking black-and-white appearance.</p>
+            </div>
+            <div class="category">
+                <h3>Rockhopper Penguin</h3>
+                <p>Named for their hopping movements, these penguins are known for their wild yellow crests and fearless nature.</p>
+            </div>
+            <div class="category">
+                <h3>King Penguin</h3>
+                <p>Second only to the Emperor penguin in size, King penguins boast vibrant orange markings and a regal posture.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function startCreating() {
+            document.getElementById('customization-area').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function learnMore() {
+            document.getElementById('meet-the-penguins').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function changeBellyColor() {
+            const belly = document.querySelector('.belly');
+            belly.style.backgroundColor = belly.style.backgroundColor === 'white' ? '#f1c40f' : 'white';
+        }
+
+        function changeEyeColor() {
+            const eyes = document.querySelectorAll('.eye');
+            eyes.forEach(eye => {
+                eye.style.backgroundColor = eye.style.backgroundColor === 'white' ? '#3498db' : 'white';
+            });
+        }
+
+        function changeFootColor() {
+            const feet = document.querySelectorAll('.foot');
+            feet.forEach(foot => {
+                foot.style.backgroundColor = foot.style.backgroundColor === 'orange' ? '#e74c3c' : 'orange';
+            });
+        }
+
+        function toggleScarf() {
+            const penguin = document.querySelector('.penguin-preview');
+            const scarf = document.querySelector('.scarf');
+            if (scarf) {
+                penguin.removeChild(scarf);
+            } else {
+                const newScarf = document.createElement('div');
+                newScarf.classList.add('scarf');
+                penguin.appendChild(newScarf);
+            }
+        }
+
+        function toggleHat() {
+            const penguin = document.querySelector('.penguin-preview');
+            const hat = document.querySelector('.hat');
+            if (hat) {
+                penguin.removeChild(hat);
+            } else {
+                const newHat = document.createElement('div');
+                newHat.classList.add('hat');
+                penguin.appendChild(newHat);
+            }
+        }
+    </script>
+</body>
+</html>
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
